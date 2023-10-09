@@ -9,6 +9,7 @@ import connectDB from './core/db';
 
 import { AuthRouter } from './src/auth/auth.routes';
 import { CategoryRouter } from './src/category/category.routes';
+import { RestaurantRouter } from './src/restaurant/restaurant.routes';
 
 const app = express();
 const port = config.PORT as string;
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth/', AuthRouter);
 app.use('/api/categories', CategoryRouter);
+app.use('/api/restaurants', RestaurantRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Serversss');
@@ -28,7 +30,10 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof ApiError) {
-    return res.status(err.httpStatusCode).send(err.message);
+    return res.status(err.httpStatusCode).json({
+      message: err.message,
+      errors: err.errors,
+    });
   }
   return res.status(500).send('Internal Server Error');
 });
