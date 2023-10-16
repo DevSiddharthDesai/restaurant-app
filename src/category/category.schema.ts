@@ -1,11 +1,11 @@
-import mongoose, { Document, Schema, Model } from "mongoose";
+import mongoose, { Document, Schema, Model } from 'mongoose';
 
 export interface ICategory extends Document {
-  name: string,
-  description: string,
-  imageUrl: string,
-  createdAt: Date,
-  updatedAt: Date
+  name: string;
+  description: string;
+  imageUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // Create the Mongoose schema
@@ -25,8 +25,11 @@ const CategorySchema: Schema<ICategory> = new Schema({
     type: Date,
   },
   updatedAt: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
-export const Category: Model<ICategory> = mongoose.model<ICategory>("Category", CategorySchema);
+export const Category: Model<ICategory> = mongoose.model<ICategory>(
+  'Category',
+  CategorySchema,
+);

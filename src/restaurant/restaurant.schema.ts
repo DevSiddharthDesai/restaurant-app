@@ -6,12 +6,14 @@ export interface IRestaurant extends Document {
   description: string;
   address: Address;
   contact: Contact;
+  profilePicture: string;
   openingHours: Array<{
     dayOfWeek: string;
     openingHours: string;
     closingHours: string;
   }>;
   rating: Array<{ average: number; count: number }>;
+  restaurantOwnerId: mongoose.Types.ObjectId | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -78,6 +80,13 @@ const RestaurantSchema: Schema<IRestaurant> = new Schema({
     //   },
     //   message: 'Rating must not be empty.',
     // },
+  },
+  profilePicture: {
+    type: String,
+    required: true,
+  },
+  restaurantOwnerId: {
+    type: mongoose.Types.ObjectId,
   },
   createdAt: {
     type: Date,

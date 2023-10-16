@@ -1,24 +1,14 @@
 import React from 'react';
 import './App.css';
 
+import Home from './pages/customer/home/Home';
+import Navigation from './components/layout/navigation/Navigation';
+
 function App() {
   return (
     <div className='App'>
-      <header className='App-header'>
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        {'Hello'}
-        <p>
-          c Edit <code>src/App.tsxzzss</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigation />
+      <Home />
     </div>
   );
 }
