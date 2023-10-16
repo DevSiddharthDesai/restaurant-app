@@ -1,17 +1,17 @@
-import mongoose, { Document, Schema, Model, ObjectId } from "mongoose";
+import mongoose, { Document, Schema, Model } from 'mongoose';
 
 export interface IMenu extends Document {
-  name: string,
-  description: string,
-  price: Number,
-  availability: boolean,
-  images: mongoose.Types.Array<string> | undefined,
-  rating: Number,
-  restaurantId: mongoose.Types.ObjectId | undefined,
-  categoryId: mongoose.Types.ObjectId | undefined,
-  spiceLevel: String, 
-  createdAt: Date,
-  updatedAt: Date
+  name: string;
+  description: string;
+  price: Number;
+  availability: boolean;
+  images: mongoose.Types.Array<string> | undefined;
+  rating: Number;
+  restaurantId: mongoose.Types.ObjectId | undefined;
+  categoryId: mongoose.Types.ObjectId | undefined;
+  spiceLevel: String;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // Create the Mongoose schema
@@ -37,7 +37,7 @@ const MenuSchema: Schema<IMenu> = new Schema({
     required: true,
   },
   rating: {
-    type: Number
+    type: Number,
   },
   categoryId: {
     type: mongoose.Types.ObjectId,
@@ -50,8 +50,8 @@ const MenuSchema: Schema<IMenu> = new Schema({
     type: Date,
   },
   updatedAt: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
-export const Menu: Model<IMenu> = mongoose.model<IMenu>("Menu", MenuSchema);
+export const Menu: Model<IMenu> = mongoose.model<IMenu>('Menu', MenuSchema);
