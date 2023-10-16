@@ -23,7 +23,7 @@
   },
   "include": [
     "./src/**/*.ts"
-, "src/component/test.tsx"  ],
+, "src/component/test.tsx", "/.d.ts", "src/components/common/sectionheading/SectionHeading.tsx"],
   "exclude": [
     "node_modules",
     "build"

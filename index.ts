@@ -20,6 +20,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/assets', express.static('assets'));
+
 app.use('/api/auth/', AuthRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/restaurants', RestaurantRouter);
