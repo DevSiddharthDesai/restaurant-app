@@ -1,47 +1,46 @@
-import {NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Auth } from '../../src/auth/auth.schema';
 import { JsonWebTokenError } from '../errors.core';
 
-declare global{
-    
-    interface JwtPayload {
-        email: string,
-        userId: string
-    }
+declare global {
+  interface JwtPayload {
+    email: string;
+    userId: string;
+  }
 
-    namespace Express {
-        interface Request {
-            currentUser?: any
-        }
+  namespace Express {
+    interface Request {
+      currentUser?: any;
     }
+  }
 }
 
-export const currentUser = (jwt_key: any) => async (req: Request, res: Response, next: NextFunction) => {
-
-    if(!req.headers.authorization){
-        return next(new JsonWebTokenError('Invalid Token'));      
+export const currentUser =
+  (jwt_key: any) => async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.headers.authorization) {
+      return next(new JsonWebTokenError('Invalid Token'));
     }
 
-    const [_ , token] = req.headers.authorization.split('Bearer ');
-        
-    try{
-        const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+    const [_, token] = req.headers.authorization.split('Bearer ');
 
-        const user = await Auth.findOne({ _id: payload.userId });
+    try {
+      const payload = jwt.verify(token, jwt_key!) as JwtPayload;
 
-        req.currentUser = user;
-        if (!user) {
-            return next(new JsonWebTokenError('User not found'));
-        }
-        const tokenAvailable = await user.checkToken(token);
+      const user = await Auth.findOne({ _id: payload.userId });
 
-        if (!tokenAvailable) {
-            return next(new JsonWebTokenError('Invalid Token'));
-        }
+      req.currentUser = user;
+      if (!user) {
+        return next(new JsonWebTokenError('User not found'));
+      }
+      const tokenAvailable = await user.checkToken(token);
 
-        next();
-    }catch(err){
+      if (!tokenAvailable) {
         return next(new JsonWebTokenError('Invalid Token'));
+      }
+
+      next();
+    } catch (err) {
+      return next(new JsonWebTokenError('Invalid Token'));
     }
-}
+  };

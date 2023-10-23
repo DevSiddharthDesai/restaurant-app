@@ -23,7 +23,7 @@
   },
   "include": [
     "./src/**/*.ts"
-, "src/component/test.tsx", "/.d.ts", "src/components/common/sectionheading/SectionHeading.tsx"],
+, "src/component/test.tsx", "/.d.ts", "src/components/common/sectionheading/SectionHeading.tsx", "src/store/root-reducer.tsx", "src/store/store.tsx"],
   "exclude": [
     "node_modules",
     "build"
