@@ -1,12 +1,12 @@
-import mongoose, { Document, Schema, Model } from "mongoose";
-import jwt from "jsonwebtoken";
-import { UserType } from "./auth.types";
-import { authenticationService } from "../../core/services/authentication";
+import mongoose, { Document, Schema, Model } from 'mongoose';
+import jwt from 'jsonwebtoken';
+import { UserType } from './auth.types';
+import { authenticationService } from '../../core/services/authentication';
 
 export interface IAuth extends Document {
-  userType: UserType,
-  email: string,
-  password: string,
+  userType: UserType;
+  email: string;
+  password: string;
   tokens: { token: string }[];
   generateAuthToken(): Promise<string>;
   checkToken(token: string): Promise<string>;
@@ -14,13 +14,13 @@ export interface IAuth extends Document {
 }
 
 export interface IUser extends Document {
-  userType: UserType,
-  email: string,
+  userType: UserType;
+  email: string;
 }
 
 // Create the Mongoose schema
 const AuthSchema: Schema<IAuth> = new Schema({
-userType: {
+  userType: {
     type: String,
     enum: Object.values(UserType),
     required: true,
@@ -33,7 +33,7 @@ userType: {
     type: String,
     required: true,
   },
-  tokens:[
+  tokens: [
     {
       token: {
         type: String,
@@ -42,10 +42,12 @@ userType: {
   ],
 });
 
-AuthSchema.pre('save', async function(done) {
-  if(this.isModified('password') || this.isNew){
-      const hashedPwd = await authenticationService.pwdToHash(this.get('password'));
-      this.set('password', hashedPwd);
+AuthSchema.pre('save', async function (done) {
+  if (this.isModified('password') || this.isNew) {
+    const hashedPwd = await authenticationService.pwdToHash(
+      this.get('password'),
+    );
+    this.set('password', hashedPwd);
   }
 });
 
@@ -64,9 +66,9 @@ AuthSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
-AuthSchema.methods.checkToken = async function(token: string) {
+AuthSchema.methods.checkToken = async function (token: string) {
   const auth = this;
-  return auth.tokens.some((obj: { token: string; }) => obj.token === token);
-}
+  return auth.tokens.some((obj: { token: string }) => obj.token === token);
+};
 
-export const Auth: Model<IAuth> = mongoose.model<IAuth>("User", AuthSchema);
+export const Auth: Model<IAuth> = mongoose.model<IAuth>('User', AuthSchema);

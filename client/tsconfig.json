@@ -19,11 +19,10 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
   },
   "include": [
-    "./src/**/*.ts"
-, "src/component/test.tsx", "/.d.ts", "src/components/common/sectionheading/SectionHeading.tsx", "src/store/root-reducer.tsx", "src/store/store.tsx"],
+    "./src/**/*.tsx", "./src/**/*.d.tsx"],
   "exclude": [
     "node_modules",
     "build"

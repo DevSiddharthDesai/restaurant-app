@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { restaurantReducer } from './Restaurant/restaurant.reducers';
+import restaurantReducer from './restaurant.slice';
 
 const rootReducer = combineReducers({
   restaurant: restaurantReducer,
 });
-
-export type RootState = ReturnType<typeof rootReducer>;
 
 export default rootReducer;

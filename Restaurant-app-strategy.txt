@@ -1,0 +1,11 @@
+Resources:
+https://react-icons.github.io/react-icons/icons?name=fc
+
+https://pratapsharma.com.np/static/70a81168d8ee88cb23c48107a1c70c1b/92c75/food-delivery-architecture.png
+
+http://preview.themeforest.net/item/costic-restaurant-dashboard-react-template/full_screen_preview/28350834?_ga=2.256076555.1089829592.1695910368-75885958.1685035288
+
+
+FrontEnd Theme - Foodota
+
+https://preview.themeforest.net/item/foodota-online-food-delivery-wordpress-theme/full_screen_preview/31808524?_ga=2.232963486.1837685218.1696754137-75885958.1685035288&_gac=1.49879764.1695943877.CjwKCAjwyNSoBhA9EiwA5aYlb2oTxFT0t7IZ7uKvX1JdV5Nj2vJBf6O5Fh3kVeyqFjhd6nIMlb1cABoC-R0QAvD_BwE

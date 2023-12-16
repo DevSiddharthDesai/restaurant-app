@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import Home from './pages/customer/home/Home';
-import Navigation from './components/layout/navigation/Navigation';
+import Navigation from './components/molecules/navigation/Navigation';
 
 function App() {
   return (

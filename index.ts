@@ -6,6 +6,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { ApiError, SocketIO } from './core';
 import connectDB from './core/db';
+import { auth, requiresAuth } from 'express-openid-connect';
 
 import { AuthRouter } from './src/auth/auth.routes';
 import { CategoryRouter } from './src/category/category.routes';
@@ -18,7 +19,7 @@ export const io = new SocketIO(server).getIO();
 connectDB();
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/assets', express.static('assets'));
 
@@ -26,8 +27,15 @@ app.use('/api/auth/', AuthRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/restaurants', RestaurantRouter);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Serversss');
+app.get('/', (req, res) => {
+  console.log(req.oidc.isAuthenticated());
+  const isAuthenticated = req.oidc.isAuthenticated();
+  const response = isAuthenticated ? req.oidc.user : 'Not logged in';
+  res.send(response);
+});
+
+app.get('/test', requiresAuth(), (req, res) => {
+  res.send('Working');
 });
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
