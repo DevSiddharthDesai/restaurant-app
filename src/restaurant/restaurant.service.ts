@@ -1,5 +1,6 @@
 import RestaurantRepository from './restaurant.repository';
 import { IRestaurant } from './restaurant.schema';
+import { IAuth } from '../auth/auth.schema';
 
 class RestaurantService {
   private readonly restaurantRepo: RestaurantRepository;
