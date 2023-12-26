@@ -2,18 +2,21 @@ import mongoose from 'mongoose';
 import { Restaurant, IRestaurant } from './restaurant.schema';
 import { Menu, IMenu } from '../menu/menu.schema';
 import { MultipleValidationErrors, ValidationError } from '../../core';
+import { Category, ICategory } from '../category/category.schema';
 
 class RestaurantRepository {
-  private model: mongoose.Model<IRestaurant>;
-  private modelMenu: mongoose.Model<IMenu>;
+  private Restaurantmodel: mongoose.Model<IRestaurant>;
+  private Menumodel: mongoose.Model<IMenu>;
+  private CategoryModel: mongoose.Model<ICategory>;
 
   constructor() {
-    this.model = Restaurant;
-    this.modelMenu = Menu;
+    this.Restaurantmodel = Restaurant;
+    this.Menumodel = Menu;
+    this.CategoryModel = Category;
   }
 
   async create(restaurant: IRestaurant): Promise<IRestaurant> {
-    const restaurantAvailable = await this.model.findOne({
+    const restaurantAvailable = await this.Restaurantmodel.findOne({
       name: restaurant.name,
     });
 
@@ -21,7 +24,7 @@ class RestaurantRepository {
       throw new ValidationError('Restaurant Already Exists');
     }
 
-    const restaurantInstance = new this.model(restaurant);
+    const restaurantInstance = new this.Restaurantmodel(restaurant);
 
     const validationError = restaurantInstance.validateSync();
 
@@ -39,20 +42,21 @@ class RestaurantRepository {
     }
 
     // Validate input
-    const errors = await this.model.validate(restaurant);
+    const errors = await this.Restaurantmodel.validate(restaurant);
 
     if (errors != null) {
       throw new ValidationError(errors);
     }
 
-    const newRestaurant = await this.model.create(restaurant);
+    const newRestaurant = await this.Restaurantmodel.create(restaurant);
 
     return newRestaurant;
   }
 
   async getSingle(RestaurantId: string): Promise<IRestaurant> {
     try {
-      const restaurant = await this.model.findById(RestaurantId).exec();
+      const restaurant =
+        await this.Restaurantmodel.findById(RestaurantId).exec();
 
       if (!restaurant) {
         throw new ValidationError('Restaurant not found');
@@ -66,7 +70,7 @@ class RestaurantRepository {
 
   async getAll(): Promise<IRestaurant[]> {
     try {
-      const categories = await this.model.find().exec();
+      const categories = await this.Restaurantmodel.find().exec();
 
       if (!categories) {
         throw new ValidationError('No Category Available');
@@ -80,7 +84,8 @@ class RestaurantRepository {
 
   async getRestaurantMenus(RestaurantId: string): Promise<any> {
     try {
-      const restaurant = await this.model.findById(RestaurantId).exec();
+      const restaurant =
+        await this.Restaurantmodel.findById(RestaurantId).exec();
 
       if (!restaurant) {
         throw new ValidationError('No Category Available');
@@ -90,9 +95,18 @@ class RestaurantRepository {
 
       const menus = await Menu.find({ _id: { $in: menuIds } }).exec();
 
+      const categoryIds = menus.map(element => element.categoryId.toString());
+
+      const uniqueCategoryIds = [...new Set(categoryIds)];
+
+      const categories = await this.CategoryModel.find({
+        _id: { $in: uniqueCategoryIds },
+      }).exec();
+
       const restaurantWithFilteredMenus = {
         ...restaurant.toObject(),
         menus: menus,
+        categories: categories,
       };
 
       return restaurantWithFilteredMenus;

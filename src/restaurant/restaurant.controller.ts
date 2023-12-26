@@ -36,7 +36,6 @@ class RestaurantController {
 
   async getRestaurantMenus(req: Request, res: Response, next: NextFunction) {
     const restaurantId = req.params.id;
-    console.log(req);
     const RestaurantMenus =
       await restaurantService.getRestaurantMenus(restaurantId);
     if (!RestaurantMenus) {
