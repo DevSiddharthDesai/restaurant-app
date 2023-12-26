@@ -30,7 +30,7 @@ const PopularRestaurant = () => {
           />
           <div className='grid grid-cols-3 gap-4'>
             {restaurants
-              ? restaurants.map(element => {
+              ? restaurants?.map(element => {
                   return (
                     <RestaurantCard
                       title={element?.name}

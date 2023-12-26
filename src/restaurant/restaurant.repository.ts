@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 import { Restaurant, IRestaurant } from './restaurant.schema';
+import { Menu, IMenu } from '../menu/menu.schema';
 import { MultipleValidationErrors, ValidationError } from '../../core';
 
 class RestaurantRepository {
   private model: mongoose.Model<IRestaurant>;
+  private modelMenu: mongoose.Model<IMenu>;
 
   constructor() {
     this.model = Restaurant;
+    this.modelMenu = Menu;
   }
 
   async create(restaurant: IRestaurant): Promise<IRestaurant> {
@@ -70,6 +73,29 @@ class RestaurantRepository {
       }
 
       return categories;
+    } catch (error) {
+      throw new ValidationError('something went wrong!');
+    }
+  }
+
+  async getRestaurantMenus(RestaurantId: string): Promise<any> {
+    try {
+      const restaurant = await this.model.findById(RestaurantId).exec();
+
+      if (!restaurant) {
+        throw new ValidationError('No Category Available');
+      }
+
+      const menuIds = restaurant.menu;
+
+      const menus = await Menu.find({ _id: { $in: menuIds } }).exec();
+
+      const restaurantWithFilteredMenus = {
+        ...restaurant.toObject(),
+        menus: menus,
+      };
+
+      return restaurantWithFilteredMenus;
     } catch (error) {
       throw new ValidationError('something went wrong!');
     }

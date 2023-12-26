@@ -4,8 +4,8 @@ export interface ICategory extends Document {
   name: string;
   description: string;
   imageUrl: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // Create the Mongoose schema

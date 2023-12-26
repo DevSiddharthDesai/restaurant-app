@@ -4,9 +4,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { headers } from '../../src/api/api';
 import { AppDispatch } from './store';
 
-interface Category {
+export interface Category {
   name: string;
   description: string;
+  imageUrl: string;
 }
 
 interface CategoriesState {
@@ -36,9 +37,9 @@ const categorySlice = createSlice({
 
 export const { setAllCategories } = categorySlice.actions;
 
-export const fetchAllRestaurants = () => async (dispatch: AppDispatch) => {
+export const fetchAllCategories = () => async (dispatch: AppDispatch) => {
   try {
-    const result = await axios.get(`${BASE_URL}/api/restaurants`, {
+    const result = await axios.get(`${BASE_URL}/api/categories`, {
       headers,
     });
 
@@ -47,3 +48,5 @@ export const fetchAllRestaurants = () => async (dispatch: AppDispatch) => {
     return error;
   }
 };
+
+export default categorySlice.reducer;

@@ -23,14 +23,25 @@ export interface OpeningHours {
   closingHours: string;
 }
 
+export interface menu {
+  availability: boolean;
+  categoryId: string;
+  description: string;
+  images: [];
+  name: string;
+  price: string;
+  restauranId: string;
+}
+
 export interface Restaurant {
   name: string;
   description: string;
   address: Address;
   contact: Contact;
   openingHours: OpeningHours[];
-  profilePicture: string;
+  premiumProdutPicture: string;
   restaurantOwnerId: string;
+  menus?: menu[];
 }
 
 interface RestaurantState {
@@ -55,10 +66,15 @@ const restaurantSlice = createSlice({
       const { payload } = action;
       state.restaurants = payload;
     },
+    setSingleRestaurant: (state, action: PayloadAction<Restaurant>) => {
+      const { payload } = action;
+      state.restaurant = payload;
+    },
   },
 });
 
-export const { setAllRestaurants } = restaurantSlice.actions;
+export const { setAllRestaurants, setSingleRestaurant } =
+  restaurantSlice.actions;
 
 export const fetchAllRestaurants = () => async (dispatch: AppDispatch) => {
   try {
@@ -71,5 +87,20 @@ export const fetchAllRestaurants = () => async (dispatch: AppDispatch) => {
     return error;
   }
 };
+
+export const fetchRestaurantMenu =
+  (id?: string) => async (dispatch: AppDispatch) => {
+    try {
+      const result = await axios.get(
+        `${BASE_URL}/api/restaurants/getMenus/${id}`,
+        {
+          headers,
+        },
+      );
+      dispatch(setSingleRestaurant(result.data));
+    } catch (error) {
+      return error;
+    }
+  };
 
 export default restaurantSlice.reducer;

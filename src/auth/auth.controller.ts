@@ -21,6 +21,8 @@ class AuthController {
       const user: IAuth = req.body;
       const result = await authService.signIn(user);
 
+      console.log(result);
+
       if (result) {
         res.status(200).send('Logged In Successfully');
       }
