@@ -11,6 +11,7 @@ import { auth, requiresAuth } from 'express-openid-connect';
 import { AuthRouter } from './src/auth/auth.routes';
 import { CategoryRouter } from './src/category/category.routes';
 import { RestaurantRouter } from './src/restaurant/restaurant.routes';
+import { MenuRouter } from './src/menu/menu.routes';
 
 const app = express();
 const port = config.PORT as string;
@@ -26,9 +27,9 @@ app.use('/assets', express.static('assets'));
 app.use('/api/auth/', AuthRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/restaurants', RestaurantRouter);
+app.use('/api/menus', MenuRouter);
 
 app.get('/', (req, res) => {
-  console.log(req.oidc.isAuthenticated());
   const isAuthenticated = req.oidc.isAuthenticated();
   const response = isAuthenticated ? req.oidc.user : 'Not logged in';
   res.send(response);

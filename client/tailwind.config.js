@@ -8,6 +8,9 @@ module.exports = {
         lato: ['Lato'],
         garamond: ['Garamond'],
       },
+      gridTemplateColumns: {
+        '60/40': '60% 40%',
+      },
     },
     colors: {
       primary: '#FFCC00',

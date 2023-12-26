@@ -51,15 +51,23 @@ class CategoryRepository {
     }
   }
 
-  async getAll(): Promise<ICategory[]> {
+  async getAll(): Promise<any[]> {
     try {
       const categories = await this.model.find().exec();
 
-      if (!categories) {
+      const categoriesWithUrls = categories.map(category => {
+        return {
+          name: category.name,
+          description: category.description,
+          imageUrl: `http://localhost:4000/assets/images/${category.imageUrl}`, // Replace YourPort with your server port and path to images
+        };
+      });
+
+      if (!categoriesWithUrls) {
         throw new ValidationError('No Category Available');
       }
 
-      return categories;
+      return categoriesWithUrls;
     } catch (error) {
       throw new ValidationError('something went wrong!');
     }

@@ -26,11 +26,23 @@ class RestaurantController {
   }
 
   async getRestaurants(req: Request, res: Response, next: NextFunction) {
+    console.log('Working');
     const Restaurants = await restaurantService.getAll();
     if (!Restaurants) {
       res.status(400).send('No Restaurant Available');
     }
     res.status(201).send(Restaurants);
+  }
+
+  async getRestaurantMenus(req: Request, res: Response, next: NextFunction) {
+    const restaurantId = req.params.id;
+    console.log(req);
+    const RestaurantMenus =
+      await restaurantService.getRestaurantMenus(restaurantId);
+    if (!RestaurantMenus) {
+      res.status(400).send('No Restaurant Available');
+    }
+    res.status(200).send(RestaurantMenus);
   }
 }
 

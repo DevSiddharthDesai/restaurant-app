@@ -6,10 +6,9 @@ export interface IMenu extends Document {
   price: Number;
   availability: boolean;
   images: mongoose.Types.Array<string> | undefined;
-  rating: Number;
-  restaurantId: mongoose.Types.ObjectId | undefined;
-  categoryId: mongoose.Types.ObjectId | undefined;
-  spiceLevel: String;
+  rating: Number | undefined;
+  restaurantId: mongoose.Types.ObjectId;
+  categoryId: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,15 +31,16 @@ const MenuSchema: Schema<IMenu> = new Schema({
     type: Boolean,
     required: true,
   },
-  spiceLevel: {
-    type: String,
-    required: true,
-  },
   rating: {
     type: Number,
   },
   categoryId: {
-    type: mongoose.Types.ObjectId,
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+  restaurantId: {
+    type: Schema.Types.ObjectId,
+    required: true,
   },
   images: {
     type: [String],

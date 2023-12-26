@@ -20,6 +20,10 @@ class RestaurantService {
   async getAll(): Promise<IRestaurant[]> {
     return this.restaurantRepo.getAll();
   }
+
+  async getRestaurantMenus(restaurantId: string): Promise<IRestaurant[]> {
+    return this.restaurantRepo.getRestaurantMenus(restaurantId);
+  }
 }
 
 export const restaurantService = new RestaurantService();

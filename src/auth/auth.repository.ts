@@ -41,6 +41,8 @@ class AuthRepository {
 
       const token = await fetchedUser.generateAuthToken();
 
+      console.log(token);
+
       return token;
     } else {
       throw new AuthFailureError('No Such User Exists!');
