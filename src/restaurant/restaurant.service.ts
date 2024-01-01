@@ -24,6 +24,16 @@ class RestaurantService {
   async getRestaurantMenus(restaurantId: string): Promise<IRestaurant[]> {
     return this.restaurantRepo.getRestaurantMenus(restaurantId);
   }
+
+  async getRestaurantMenusBasedOnCategory(
+    restaurantId: string,
+    categoryId: string,
+  ): Promise<IRestaurant[]> {
+    return this.restaurantRepo.getRestaurantMenusBasedOnCategory(
+      restaurantId,
+      categoryId,
+    );
+  }
 }
 
 export const restaurantService = new RestaurantService();

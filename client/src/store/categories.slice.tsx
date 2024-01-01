@@ -5,6 +5,7 @@ import { headers } from '../../src/api/api';
 import { AppDispatch } from './store';
 
 export interface Category {
+  _id: string;
   name: string;
   description: string;
   imageUrl: string;

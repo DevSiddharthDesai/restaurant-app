@@ -6,9 +6,15 @@ interface RestaurantInfo {
   title: string;
   address: { street?: string; city?: string; state?: string };
   openingHours: { openingHours: string; closingHours: string };
+  restaurantId: string;
 }
 
-const RestaurantCard = ({ title, address, openingHours }: RestaurantInfo) => {
+const RestaurantCard = ({
+  restaurantId,
+  title,
+  address,
+  openingHours,
+}: RestaurantInfo) => {
   return (
     <div className='mb-10 overflow-hidden rounded-lg bg-white'>
       <img src={I1} alt='arcadian' className='w-full' />

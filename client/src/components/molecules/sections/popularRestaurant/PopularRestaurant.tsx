@@ -16,7 +16,6 @@ const PopularRestaurant = () => {
   );
 
   useEffect(() => {
-    // Dispatch the action to fetch all restaurants when the component mounts
     dispatch(fetchAllRestaurants() as any);
   }, [dispatch]);
 
@@ -33,6 +32,7 @@ const PopularRestaurant = () => {
               ? restaurants.map(element => {
                   return (
                     <RestaurantCard
+                      restaurantId={element._id}
                       title={element?.name}
                       address={element?.address}
                       openingHours={element?.openingHours[0]}

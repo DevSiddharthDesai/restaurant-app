@@ -114,6 +114,26 @@ class RestaurantRepository {
       throw new ValidationError('something went wrong!');
     }
   }
+
+  async getRestaurantMenusBasedOnCategory(
+    RestaurantId: string,
+    categoryId: string,
+  ): Promise<any> {
+    try {
+      const menus = await Menu.find({
+        categoryId: categoryId,
+        restaurantId: RestaurantId,
+      }).exec();
+
+      if (!menus) {
+        throw new ValidationError('No Menu Available');
+      }
+
+      return menus;
+    } catch (error) {
+      throw new ValidationError('something went wrong!');
+    }
+  }
 }
 
 export default RestaurantRepository;

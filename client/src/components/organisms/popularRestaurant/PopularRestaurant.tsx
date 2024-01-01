@@ -33,6 +33,7 @@ const PopularRestaurant = () => {
               ? restaurants?.map(element => {
                   return (
                     <RestaurantCard
+                      restaurantId={element._id}
                       title={element?.name}
                       address={element?.address}
                       openingHours={element?.openingHours[0]}

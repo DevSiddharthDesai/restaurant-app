@@ -17,6 +17,9 @@ module.exports = {
       secondary: '#231900',
       white: '#FFFFFF',
       gray: '#f2f2f2',
+      red: {
+        500: '#EF4444', // Adjust the hex code accordingly
+      },
     },
   },
   plugins: [],

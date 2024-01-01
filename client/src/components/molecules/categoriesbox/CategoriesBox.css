@@ -1,0 +1,44 @@
+.slick-arrow-left {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  height: 34px;
+  padding: 0;
+  transform: translate(0, -100%);
+  cursor: pointer;
+  left: 0;
+  background-color: #ffcc00;
+  color: #000;
+  z-index: 10;
+}
+.slick-arrow-right {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  height: 34px;
+  padding: 0;
+  transform: translate(0, -100%);
+  cursor: pointer;
+  right: 0;
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.slick-arrow-left svg,
+.slick-arrow-right svg {
+  width: 20px;
+  height: 20px;
+}
+
+.slick-slide {
+  background-color: lightgray;
+  text-align: center;
+  padding: 4px 0;
+  margin: 0 2px;
+}

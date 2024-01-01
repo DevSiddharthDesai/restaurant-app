@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import './App.css';
 
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <Navigation />
+      <Toaster position='bottom-right' />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/restaurants/:id' element={<Product />} />
