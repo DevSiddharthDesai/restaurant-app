@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
-import restaurantReducer from './restaurant.slice';
+import restaurantSlice from './restaurant.slice';
 import categoriesSlice from './categories.slice';
 import menuSlice from './menu.slice';
+import cartSlice from './cart.slice';
 
 const rootReducer = combineReducers({
-  restaurant: restaurantReducer,
+  restaurant: restaurantSlice,
   categories: categoriesSlice,
   menus: menuSlice,
+  cart: cartSlice,
 });
 
 export default rootReducer;

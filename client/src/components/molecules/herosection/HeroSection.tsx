@@ -1,6 +1,6 @@
 import React from 'react';
 import './HeroSection.css';
-import SearchInput from '../../atoms/inputElements/inputWithSearch/SearchInput';
+import SearchInput from '../../atoms/inputelements/inputWithSearch/SearchInput';
 import { P1, P2, P3, P4, P5, P6, P7 } from '../../../utils/images';
 
 const HeroSection = () => {
