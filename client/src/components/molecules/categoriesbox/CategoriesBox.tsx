@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -25,10 +25,15 @@ const CategoriesBox = ({
   onCategoryClick: (categoryId: string) => void;
 }) => {
   const dispatch = useDispatch();
+
   const { showToast } = useCustomToast();
 
   const menu = useSelector(
     (state: RootState) => state.restaurant.menu as menu[],
+  );
+
+  const cartItems = useSelector(
+    (state: RootState) => state.cart.cartItems as menu[],
   );
 
   const PrevArrow = (props: any) => {
@@ -56,8 +61,9 @@ const CategoriesBox = ({
   const addtoCart = (menuId: string, quantity: number) => {
     if (quantity < 1) {
       showToast('error', 'Quantity is not valid');
+      return;
     }
-    dispatch(addToCart(menuId, quantity) as any);
+    dispatch(addToCart(cartItems, menuId, quantity) as any);
   };
 
   var settings = {

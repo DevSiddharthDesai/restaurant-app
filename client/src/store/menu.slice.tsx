@@ -22,7 +22,10 @@ const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    setMenus: (state, action: PayloadAction<menu[]>) => {},
+    setMenus: (state, action: PayloadAction<menu[]>) => {
+      const { payload } = action;
+      state.menuItems = payload;
+    },
   },
 });
 

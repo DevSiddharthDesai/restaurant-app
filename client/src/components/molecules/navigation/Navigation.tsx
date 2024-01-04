@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../logo/Logo';
-import Button from '../../atoms/Button/Button';
+import Button from '../../atoms/button/Button';
 
 const Navigation = () => {
   return (

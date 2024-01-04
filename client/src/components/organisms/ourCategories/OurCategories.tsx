@@ -3,7 +3,7 @@ import { RootState } from '../../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import SectionHeading from '../../molecules/sectionheading/SectionHeading';
 import { Category, fetchAllCategories } from '../../../store/categories.slice';
-import CategoriesCard from '../categoriesCard/CategoriesCard';
+import CategoriesCard from '../categoriescard/CategoriesCard';
 
 const OurCategories = () => {
   const dispatch = useDispatch();

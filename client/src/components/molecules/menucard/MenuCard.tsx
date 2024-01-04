@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './MenuCard.css';
 
 import { P1 } from '../../../utils/images';
@@ -16,9 +16,12 @@ const MenuCard = ({
   itemPrice: string;
   addToCart: (menuId: string, quantity: number) => void;
 }) => {
-  const [qty, setQty] = useState('');
+  const [qty, setQty] = useState('1');
+  useEffect(() => {
+    setQty('1');
+  }, [itemId]);
   return (
-    <div className='flex mb-10' key={itemId}>
+    <div className='flex mb-10' key={itemName}>
       <div className='menu-card-image'>
         <img src={P1} />
       </div>
@@ -34,6 +37,7 @@ const MenuCard = ({
           type='number'
           min='1'
           max='10'
+          value={qty}
           onChange={event => setQty(event.target.value)}
         />
       </div>

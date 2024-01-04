@@ -8,9 +8,9 @@ import {
   fetchRestaurantMenuBasedOnCategory,
 } from '../../../store/restaurant.slice';
 import ProductBanner from '../../../components/molecules/productbanner/ProductBanner';
-import { RestaurantIntro } from '../../../components/organisms/restaurantIntro/RestaurantIntro';
+import { RestaurantIntro } from '../../../components/organisms/restaurantintro/RestaurantIntro';
 import { I1 } from '../../../utils/images';
-import RestaurantDetails from '../../../components/organisms/restaurantDetails/RestaurantDetails';
+import RestaurantDetails from '../../../components/organisms/restaurantdetails/RestaurantDetails';
 
 const Product = () => {
   const { id } = useParams();

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SectionHeading from '../../molecules/sectionheading/SectionHeading';
-import RestaurantCard from '../restaurantCard/RestaurantCard';
+import RestaurantCard from '../restaurantcard/RestaurantCard';
 import { RootState } from '../../../store/store';
 import {
   Restaurant,
