@@ -1,0 +1,26 @@
+.menu-card-image {
+  width: 10%;
+  margin-right: 20px;
+}
+.menu-card-details {
+  width: 50%;
+}
+.menu-card-quantity {
+  width: 20%;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+.menu-card-quantity input {
+  padding: 5px 0 5px 10px;
+  background-color: lightgray;
+}
+.menu-card-add-cart {
+  width: 20%;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+/* .menu-card-price {
+  color: red;
+} */

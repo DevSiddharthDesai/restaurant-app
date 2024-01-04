@@ -16,6 +16,9 @@ router
   );
 router.route('/').get(restaurantCtrl.getRestaurants);
 router.route('/:id').get(restaurantCtrl.getRestaurant);
-router.route('/getMenus/:id').get(restaurantCtrl.getRestaurantMenus);
+router.route('/getMenus/:restaurantId').get(restaurantCtrl.getRestaurantMenus);
+router
+  .route('/getMenus/:restaurantId/:categoryId')
+  .get(restaurantCtrl.getRestaurantMenusOnCategoryBased);
 
 export { router as RestaurantRouter };
